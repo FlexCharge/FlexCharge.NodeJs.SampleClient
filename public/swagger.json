@@ -1,0 +1,489 @@
+{
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"PingResponse": {
+				"properties": {
+					"message": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"StringStringStringBooleanValueTuple": {
+				"properties": {},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"EvaluateResponse": {
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"result": {
+						"type": "string",
+						"nullable": true
+					},
+					"status": {
+						"type": "string",
+						"nullable": true
+					},
+					"statusCode": {
+						"type": "string",
+						"nullable": true
+					},
+					"errors": {
+						"items": {
+							"$ref": "#/components/schemas/StringStringStringBooleanValueTuple"
+						},
+						"type": "array",
+						"nullable": true
+					},
+					"customProperties": {
+						"properties": {},
+						"additionalProperties": {
+							"type": "string"
+						},
+						"type": "object",
+						"nullable": true
+					},
+					"orderSessionKey": {
+						"type": "string",
+						"nullable": true
+					},
+					"senseKey": {
+						"type": "string",
+						"nullable": true
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransmitResponse": {
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"result": {
+						"type": "string",
+						"nullable": true
+					},
+					"status": {
+						"type": "number",
+						"format": "double"
+					},
+					"statusCode": {
+						"type": "string",
+						"nullable": true
+					},
+					"errors": {
+						"items": {
+							"$ref": "#/components/schemas/StringStringStringBooleanValueTuple"
+						},
+						"type": "array",
+						"nullable": true
+					},
+					"customProperties": {
+						"properties": {},
+						"additionalProperties": {
+							"type": "string"
+						},
+						"type": "object",
+						"nullable": true
+					},
+					"transmitId": {
+						"type": "string"
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"OutcomeResponse": {
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"result": {
+						"type": "string",
+						"nullable": true
+					},
+					"statusCode": {
+						"type": "string",
+						"nullable": true
+					},
+					"errors": {
+						"items": {
+							"$ref": "#/components/schemas/StringStringStringBooleanValueTuple"
+						},
+						"type": "array",
+						"nullable": true
+					},
+					"customProperties": {
+						"properties": {},
+						"additionalProperties": {
+							"type": "string"
+						},
+						"type": "object",
+						"nullable": true
+					},
+					"status": {
+						"type": "string",
+						"nullable": true
+					},
+					"confirmationId": {
+						"type": "string",
+						"nullable": true
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"RefundResult": {
+				"properties": {
+					"success": {
+						"type": "boolean"
+					},
+					"result": {
+						"type": "string",
+						"nullable": true
+					},
+					"status": {
+						"type": "string",
+						"nullable": true
+					},
+					"statusCode": {
+						"type": "string",
+						"nullable": true
+					},
+					"errors": {
+						"items": {
+							"$ref": "#/components/schemas/StringStringStringBooleanValueTuple"
+						},
+						"type": "array",
+						"nullable": true
+					},
+					"customProperties": {
+						"properties": {},
+						"additionalProperties": {
+							"type": "string"
+						},
+						"type": "object",
+						"nullable": true
+					},
+					"responseCode": {
+						"type": "string",
+						"nullable": true
+					},
+					"responseMessage": {
+						"type": "string",
+						"nullable": true
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "express-typescript",
+		"version": "1.0.0",
+		"license": {
+			"name": "ISC"
+		},
+		"contact": {}
+	},
+	"openapi": "3.0.0",
+	"paths": {
+		"/ping": {
+			"get": {
+				"operationId": "GetMessage",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/PingResponse"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/evaluate": {
+			"get": {
+				"operationId": "Get",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/EvaluateResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"SampleEvaluate"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "publicKey",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "secretKey",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "tokenizedCardNumber",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/evaluate/mit": {
+			"get": {
+				"operationId": "GetMIT",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/EvaluateResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"SampleEvaluate"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "publicKey",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "secretKey",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "tokenizedCardNumber",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/evaluate/mit-recurring": {
+			"get": {
+				"operationId": "GetMITRecurring",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/EvaluateResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"SampleEvaluate"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "publicKey",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "secretKey",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "tokenizedCardNumber",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/transmit": {
+			"get": {
+				"operationId": "SimulateTransmit",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/TransmitResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"SampleTransmit"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "publicKey",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "secretKey",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/outcome": {
+			"get": {
+				"operationId": "SimulateOutcome",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/OutcomeResponse"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"SampleOutcome"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "publicKey",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "secretKey",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/refund": {
+			"get": {
+				"operationId": "SimulateRefund",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/RefundResult"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"SampleRefund"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "publicKey",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "secretKey",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}
