@@ -4,6 +4,7 @@ import { SampleEvaluateController } from '../controllers/SampleEvaluateControlle
 import { SampleTransmitController } from '../controllers/SampleTransmitController';
 import { SampleOutcomeController } from '../controllers/SampleOutcomeController';
 import { SampleRefundController } from '../controllers/SampleRefundController';
+import { SampleWebhookController } from '../controllers/SampleWebhookController';
 
 const router = express.Router();
 
@@ -68,6 +69,12 @@ router.get('/refund', async (_req, res) => {
     _req.query.secretKey as string,
   );
   return res.send(response);
+});
+
+router.get('/webhook', async (_req, res) => {
+  const controller = new SampleWebhookController();
+  const response = await controller.handleWebhook();
+  return res.status(200).send(response);
 });
 
 export default router;

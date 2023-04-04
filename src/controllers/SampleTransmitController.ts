@@ -19,16 +19,11 @@ export class SampleTransmitController extends Controller {
     @Query() secretKey: string,
   ): Promise<TransmitResponse> {
     try {
-      console.log('simulateTransmit++++++');
       //get bearer token
       const token = await authenticate(publicKey, secretKey);
 
-      console.log('token---', token);
-
       //Generate transmit information model
       const transmitBody = this.dummyTransmitModel();
-
-      console.log('transmitBody---', transmitBody);
 
       //Invoke transmit
       const transmitResponse = await this.executeTransmit(token, transmitBody);
@@ -54,7 +49,6 @@ export class SampleTransmitController extends Controller {
       },
       data: transmitBody,
     };
-    console.log('config---', config);
     const response = await axios<TransmitResponse>(config);
     return response.data;
   }
